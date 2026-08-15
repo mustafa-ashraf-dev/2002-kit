@@ -1,0 +1,9 @@
+.wrap {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.wrap :global(.sp-layout) {
+  border: none;
+  border-radius: 0;
+}

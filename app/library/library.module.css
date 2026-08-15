@@ -1,0 +1,193 @@
+.headerRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.headerRow h1 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.headerDesc {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  max-width: 560px;
+  margin: 10px 0 0;
+  line-height: 1.6;
+}
+
+.countBadge {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.empty {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card::before {
+  top: 5px;
+  left: 5px;
+  border-top: 1.5px solid var(--accent-bright);
+  border-left: 1.5px solid var(--accent-bright);
+}
+
+.card::after {
+  bottom: 5px;
+  right: 5px;
+  border-bottom: 1.5px solid var(--accent-bright);
+  border-right: 1.5px solid var(--accent-bright);
+}
+
+.card:hover::before,
+.card:hover::after {
+  opacity: 1;
+}
+
+/* Tag row — the mono "technical parameter" label, its own row above the
+   preview, not overlaid on it. */
+.cardTagRow {
+  padding: 14px 16px 0;
+}
+
+.cardTag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+/* Deliberately NOT a live-rendered preview — running a real Sandpack
+   iframe per grid card would mean dozens of bundler instances loading
+   at once as the library grows. A static centered placeholder keeps the
+   visual rhythm without the performance cost; the real live preview only
+   runs on the single detail page. */
+.cardPreview {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.cardPreviewInner {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+}
+
+.cardDivider {
+  border-top: 1px solid var(--border);
+}
+
+.cardFooter {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rowTitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.viewCode {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 5px 12px;
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.card:hover .viewCode {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+}
+
+.rowDesc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,160 @@
+.header {
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.logoDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+.navLink:hover {
+  color: var(--ink);
+}
+
+.chevron {
+  font-size: 0.65rem;
+  color: var(--ink-3);
+  transition: transform 0.15s ease;
+}
+
+.dropdown:has(.dropdownMenu:popover-open) .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: relative;
+  anchor-name: --categories-trigger;
+}
+
+.dropdownMenu {
+  position: fixed;
+  position-anchor: --categories-trigger;
+  top: calc(anchor(bottom) + 10px);
+  left: anchor(left);
+  margin: 0;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 8px 24px rgba(17, 20, 27, 0.12);
+
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    display 0.15s allow-discrete,
+    overlay 0.15s allow-discrete;
+}
+
+.dropdownMenu:popover-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@starting-style {
+  .dropdownMenu:popover-open {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+
+/* Fallback for browsers without anchor-positioning support. */
+@supports not (anchor-name: --x) {
+  .dropdownMenu {
+    top: 62px;
+    left: 40px;
+  }
+}
+
+.dropdownItem {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+
+.dropdownItem:hover {
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.ghLink {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 7px 16px;
+  flex-shrink: 0;
+}
+
+.ghLink:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .bar {
+    padding: 14px 20px;
+    gap: 16px;
+  }
+  .nav {
+    gap: 14px;
+  }
+}

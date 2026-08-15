@@ -1,0 +1,102 @@
+.wrap {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--code-bg);
+  margin: 16px 0;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab,
+.tabActive {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  background: transparent;
+  color: #8a909c;
+  cursor: pointer;
+}
+
+.tabActive {
+  color: var(--accent-bright);
+  border-color: rgba(0, 224, 138, 0.35);
+  background: rgba(0, 224, 138, 0.12);
+}
+
+.tab:hover {
+  color: var(--code-ink);
+}
+
+.copyBtn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #8a909c;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.copyBtn:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent-bright);
+}
+
+/* shiki's <pre> comes with its own inline background — override it so our
+   .wrap background (and its rounded corners / tab bar) stays consistent. */
+.code :global(pre) {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: transparent !important;
+}
+
+.notes {
+  margin: 0;
+  padding: 10px 16px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: #8a909c;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.fileTabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fileTab,
+.fileTabActive {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.fileTabActive {
+  color: var(--accent-bright);
+  background: rgba(0, 224, 138, 0.1);
+}

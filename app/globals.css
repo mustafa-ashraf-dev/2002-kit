@@ -1,0 +1,91 @@
+/* ===== Bastion design tokens — dark, green accent ===== */
+:root {
+  --bg: #0a0b0a;
+  --bg-2: #091b0d;
+  --surface: #121614;
+  --surface-alt: #171c19;
+  --border: #232a27;
+  --border-strong: #34413b;
+
+  --ink: #e4e8e6;
+  --ink-2: #a7b0ac;
+  --ink-3: #7a8583;
+
+  --accent: #00e08a;
+  --accent-bright: #33ffb0;
+  --accent-soft: rgba(0, 224, 138, 0.12);
+
+  --danger: #ff5c5c;
+  --danger-soft: rgba(255, 92, 92, 0.12);
+  --warning: #ffb84c;
+  --warning-soft: rgba(255, 184, 76, 0.12);
+
+  /* code panel sits slightly lighter than the page so it still reads as
+     an elevated panel even though everything is dark now */
+  --code-bg: #0e1210;
+  --code-ink: #e4e8e6;
+
+  --radius: 6px;
+  --radius-md: 8px;
+  --sidebar-width: 260px;
+
+  --font-mono: var(--font-plex-mono), "SFMono-Regular", Consolas, monospace;
+  --font-sans:
+    var(--font-plex-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+
+body {
+  /* subtle scanline texture, kept quiet on purpose */
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px
+  );
+  background-size: 100% 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* Visible keyboard focus everywhere — accessibility floor, non-negotiable */
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+}
