@@ -4,6 +4,7 @@ import "./globals.css";
 import styles from "./layout.module.css";
 import { Header } from "@/components/site/Header";
 import { baseURL, siteName, title, description } from "./config";
+import ScrollToTopButton from "@/components/site/ScrollToTopButton";
 
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/icon?<generated>",
-    shortcut: "/icon?<generated>",
-    apple: "/icon?<generated>",
+    icon: "/icon.ico",
+    shortcut: "/icon.ico",
+    apple: "/icon.ico",
   },
   alternates: {
     canonical: baseURL,
@@ -68,6 +69,7 @@ export default function RootLayout({
         <main id="main-content" className={styles.content}>
           {children}
         </main>
+        <ScrollToTopButton />
       </body>
     </html>
   );

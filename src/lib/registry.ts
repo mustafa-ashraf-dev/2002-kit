@@ -3,7 +3,7 @@
 // pages automatically. The site reads from this file only — no other
 // place needs to change when you add a component.
 
-import { SimpleButton } from "./components";
+import { MagneticGlassButton } from "./components";
 import { Category, CategoryMeta, ComponentMeta } from "./types";
 
 // Hero section, shown on the home page Category list. Each category has a slug (used in the URL), a title, and a description.
@@ -41,7 +41,7 @@ export const categories: CategoryMeta[] = [
 
 // Sample entry — placeholder so the templates render. Replace with your
 // real components; keep the same shape.
-export const components: ComponentMeta[] = [SimpleButton];
+export const components: ComponentMeta[] = [MagneticGlassButton];
 
 export function getComponentsByCategory(categorySlug: string) {
   return components.filter((c) => c.category.join("-") === categorySlug);

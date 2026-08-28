@@ -1,14 +1,14 @@
-export const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "Bastion";
+export const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "2002-kit";
 
 export const title =
   process.env.NEXT_PUBLIC_TITLE ||
-  "Bastion — Hardened, accessible React components";
+  "2002-KIT — Hardened, accessible React components";
 
 export const description =
   process.env.NEXT_PUBLIC_DESCRIPTION ||
   "Copy-paste forms, accessible UI, and security utilities — each shown in a pure and a library version, explained line by line.";
 
-const defaultBaseURL = "https://bastion.vercel.app";
+const defaultBaseURL = "https://2002-kit.vercel.app";
 
 // Vercel sets VERCEL_PROJECT_PRODUCTION_URL automatically at build time —
 // nothing to configure by hand for a standard Vercel deploy. (Previously

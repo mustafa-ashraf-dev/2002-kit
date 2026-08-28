@@ -13,17 +13,18 @@
 
 .title {
   font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
   margin: 0 0 20px;
   max-width: 720px;
   color: var(--ink);
+  font-weight: 900;
+  font-size: clamp(40px, 7vw, 74px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--ink-2);
   max-width: 560px;
   line-height: 1.6;

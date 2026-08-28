@@ -1,18 +1,52 @@
 .wrap {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
-  overflow: hidden;
   background: var(--code-bg);
   margin: 16px 0;
+  max-width: 100%; /* was 600px — a fixed px cap fights the grid column's real (responsive) width */
+  max-height: 1040px;
+  overflow-y: auto; /* was `overflow: auto` — that allowed both axes */
+  overflow-x: hidden; /* explicit safety net so .wrap itself can never scroll sideways */
+
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--border-strong) 60%, transparent)
+    transparent;
+}
+/* WebKit (Chrome, Safari, Edge) */
+.wrap::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
+.wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--border-strong) 60%, transparent);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: content-box; /* Creates padding effect */
+}
+
+.wrap::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-2);
+}
+
+.wrap::-webkit-scrollbar-corner {
+  background: transparent;
+}
 .bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  /* background: rgba(255, 255, 255, 0.03); */
+  position: sticky;
+  top: 0px;
+  height: 100%;
+  background-color: rgb(36, 36, 36);
 }
 
 .tabs {
@@ -28,14 +62,16 @@
   border-radius: var(--radius);
   border: 1px solid transparent;
   background: transparent;
-  color: #8a909c;
+  color: #ffffff;
   cursor: pointer;
+  position: sticky;
+  top: 0px;
+  height: 100%;
 }
 
 .tabActive {
-  color: var(--accent-bright);
-  border-color: rgba(0, 224, 138, 0.35);
-  background: rgba(0, 224, 138, 0.12);
+  color: #fbfcff;
+  background: rgba(154, 231, 241, 0.199);
 }
 
 .tab:hover {
@@ -45,7 +81,7 @@
 .copyBtn {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #8a909c;
+  color: #f5f6f7;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius);
@@ -63,10 +99,17 @@
 .code :global(pre) {
   margin: 0;
   padding: 16px;
-  overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.6;
   background: transparent !important;
+
+  white-space: pre-wrap; /* wrap long lines instead of scrolling — keeps indentation intact */
+  word-break: break-word; /* breaks one unbroken long token (a long string, a URL) so it can't force horizontal overflow on its own */
+  overflow-wrap: anywhere; /* same intent as word-break, broader browser-engine coverage */
+}
+.code {
+  padding: 1rem;
+  color: #fbfcff !important;
 }
 
 .notes {
@@ -82,6 +125,10 @@
   gap: 4px;
   padding: 6px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 45px;
+  height: 100%;
+  background-color: rgb(36, 36, 36);
 }
 
 .fileTab,
@@ -92,11 +139,11 @@
   border-radius: 4px;
   border: none;
   background: transparent;
-  color: #6b7280;
+  color: #fbfcff;
   cursor: pointer;
 }
 
 .fileTabActive {
-  color: var(--accent-bright);
-  background: rgba(0, 224, 138, 0.1);
+  color: #fbfcff;
+  background: rgba(154, 231, 241, 0.199);
 }

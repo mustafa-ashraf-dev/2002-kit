@@ -1,0 +1,93 @@
+/* src/components/previews/MagneticGlassButton.module.css */
+
+.magneticBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(34, 34, 34, 0.95);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.magneticBtn:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.magneticBtn:active {
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(0.97) !important;
+}
+
+.magneticBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+/* Glow layer behind the glass */
+.btnGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--glow-color, rgba(59, 130, 246, 0.35)),
+    transparent 70%
+  );
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.magneticBtn:hover .btnGlow {
+  opacity: 1;
+}
+
+/* Content sits above everything */
+.btnContent {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .magneticBtn {
+    transition: none;
+    transform: none !important;
+  }
+
+  .btnGlow {
+    display: none;
+  }
+}

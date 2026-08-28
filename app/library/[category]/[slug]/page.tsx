@@ -34,38 +34,67 @@ export default async function ComponentDetailPage({
   const primaryVariant = component.variants[0];
 
   return (
-    <article>
-      <header className={styles.header}>
-        <h1 className={styles.title}>{component.title}</h1>
-        <p className={styles.description}>{component.description}</p>
-        <div className={styles.badges}>
-          {component.badges.map((b) => (
-            <SecurityBadge key={b.label} badge={b} />
-          ))}
-        </div>
-      </header>
+    <>
+      <article className={styles.slugPage}>
+        <section className={styles.codeBlockSection}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>{component.title}</h1>
+            <p className={styles.description}>{component.description}</p>
+            <div className={styles.badges}>
+              {component.badges.map((b) => (
+                <SecurityBadge key={b.label} badge={b} />
+              ))}
+            </div>
+          </header>
 
-      {primaryVariant ? (
-        <div className={styles.previewBlock}>
-          <LivePreview variant={primaryVariant} />
-        </div>
-      ) : (
-        <section className={styles.previewPlaceholder}>
-          <p>No implementation yet — nothing to preview.</p>
+          {primaryVariant ? (
+            <div className={styles.previewBlock}>
+              <LivePreview variant={primaryVariant} />
+            </div>
+          ) : (
+            <div className={styles.previewPlaceholder}>
+              <p>No implementation yet — nothing to preview.</p>
+            </div>
+          )}
         </section>
-      )}
 
+        <section>
+          <h2 className={styles.sectionLabel}>Code</h2>
+          <CodeBlock variants={highlighted} />
+        </section>
+
+        {/* Understanding of the Code
       <section>
-        <h2 className={styles.sectionLabel}>Code</h2>
-        <CodeBlock variants={highlighted} />
-      </section>
+        <h2 className={styles.sectionLabel}>Simple Button</h2>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis
+          similique deserunt atque! Maxime placeat architecto harum dolorem nemo
+          provident, illum earum quis debitis soluta beatae repudiandae numquam
+          aliquam reprehenderit, hic nobis id rem! Quae voluptate minus
+          inventore omnis at. Quas ex reprehenderit explicabo blanditiis ipsam
+          nisi. Nesciunt quia, soluta aspernatur, nisi incidunt ipsum non
+          voluptatum illum facere repudiandae, dicta rem inventore. Quasi sint,
+          animi tempore nam suscipit vel similique maxime ipsa, eum maiores
+          molestiae amet sequi possimus cupiditate at ratione explicabo
+          provident distinctio! Temporibus excepturi porro laborum quam, tempora
+          distinctio repellendus dignissimos eligendi nisi repellat quidem
+          facilis nobis in velit maiores, cupiditate voluptatum corrupti odio
+          culpa reprehenderit ipsum cumque. Libero cupiditate consectetur
+          corrupti facilis fuga non voluptatum ab, voluptate quod nemo eveniet
+          quasi dolorum maxime autem quaerat dolore aliquam nesciunt excepturi
+          velit veritatis nisi dolor ut debitis alias? Officia quos voluptatum
+          reiciendis quis repellat ullam in sed numquam saepe aspernatur! Omnis
+          laborum hic blanditiis labore.
+        </p>
+      </section> */}
+      </article>
 
       {component.explanation && (
-        <section>
+        <section className={styles.explanations}>
           <h2 className={styles.sectionLabel}>Line by line</h2>
           <p className={styles.explanation}>{component.explanation}</p>
         </section>
       )}
-    </article>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from "@/lib/registry";
 import { SecurityBadge } from "@/components/site/SecurityBadge";
 import listStyles from "../library.module.css";
+import LazyPreview from "@/components/site/LazyPreview";
 
 export default async function CategoryPage({
   params,
@@ -52,10 +53,10 @@ export default async function CategoryPage({
                 </span>
               </div>
               {/* Card preview the component */}
+              {/* Card preview component */}
               <div className={listStyles.cardPreview}>
-                <span className={listStyles.cardPreviewInner}>{c.title}</span>
-              </div>
-
+                <LazyPreview slug={c.slug.join("-")} fallbackTitle={c.title} />
+              </div>{" "}
               {/* Card Divider */}
               <div className={listStyles.cardDivider} />
               {/* Card Footer */}

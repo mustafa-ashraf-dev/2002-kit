@@ -1,3 +1,59 @@
+/* ===== DESKTOP ===== */
+.slugPage {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  max-height: 1200px;
+}
+.explanations {
+  padding: 48px 0 56px;
+  border-top: 1px solid var(--border);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin: 0 0 20px;
+}
+/* Left column: sticky preview */
+.codeBlockSection {
+  grid-column: 1;
+  grid-row: 1 / span 20; /* Span every row so it stays pinned */
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  padding: 0;
+  height: auto;
+}
+/* Right column: code + explanation stack vertically */
+.slugPage > section:not(.codeBlockSection) {
+  grid-column: 2;
+  min-width: 0; /* Critical: prevents long code lines from breaking layout */
+  padding: 1rem;
+  height: 100%;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 968px) {
+  .slugPage {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .codeBlockSection {
+    position: relative;
+    top: auto;
+    grid-row: auto;
+    width: 100%;
+  }
+
+  .slugPage > section:not(.codeBlockSection) {
+    grid-column: 1;
+  }
+}
 .header {
   border-bottom: 1px solid var(--border);
   padding-bottom: 24px;

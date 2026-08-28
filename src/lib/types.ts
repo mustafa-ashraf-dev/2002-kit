@@ -2,6 +2,8 @@
 // Mostafa: this is the schema every component entry follows.
 // Add new entries in registry.ts using this shape.
 
+import { NextComponentType } from "next";
+
 export type Category =
   | "forms"
   | "accessibility"
@@ -27,6 +29,10 @@ export interface CodeVariant {
   language: string;
   code: string;
   css?: string; // companion CSS Module, optional
+  /** Explicit, not inferred from whether `prompt` happens to be set. */
+  source: "human" | "ai";
+  /** Only meaningful when source === "ai" — the actual prompt used. */
+  prompt?: string;
   cssFilename?: string; // defaults to "Component.module.css"
   notes?: string;
 }
@@ -42,6 +48,13 @@ export interface ComponentMeta {
   variants: CodeVariant[];
   // Longer-form line-by-line explanation, rendered as markdown-ish text.
   explanation?: string;
+  /** A real component, rendered directly in list/grid thumbnails — no
+   * Sandpack, since sandboxing every card would mean dozens of bundler
+   * instances on one page. This is a SEPARATE source from
+   * variants[].code — the two can drift if you edit one and forget the
+   * other. The detail page's Sandpack preview stays the "guaranteed
+   * accurate" one, since it literally runs variants[0].code. */
+  preview?: NextComponentType;
 }
 
 export interface CategoryMeta {

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Link from "next/link";
 import { categories, components } from "@/lib/registry";
 import styles from "./page.module.css";
@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <section className={styles.hero}>
         <p className={styles.eyebrow}>
-          $ bastion Built for the copy-paste workflow.
+          $ 2002 KIT Built for the copy-paste workflow.
         </p>
         <h1 className={styles.title}>
           Components that survive contact

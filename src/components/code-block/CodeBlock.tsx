@@ -6,12 +6,25 @@ import styles from "./CodeBlock.module.css";
 
 export function CodeBlock({ variants }: { variants: HighlightedVariant[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeFile, setActiveFile] = useState<"code" | "css">("code");
+  const [activeFile, setActiveFile] = useState<"code" | "css" | "prompt">(
+    "code",
+  );
   const [copied, setCopied] = useState(false);
   const active = variants[activeIndex];
   const showingCss = activeFile === "css" && !!active.css;
-  const displayHtml = showingCss ? active.cssHtml! : active.html;
-  const displayRaw = showingCss ? active.css! : active.code;
+  const showingPrompt = activeFile === "prompt" && !!active.prompt;
+
+  const displayHtml = showingCss
+    ? active.cssHtml!
+    : showingPrompt
+      ? active.prompt!
+      : active.html;
+
+  const displayRaw = showingCss
+    ? active.css!
+    : showingPrompt
+      ? active.prompt!
+      : active.code;
 
   function selectVariant(i: number) {
     setActiveIndex(i);
@@ -74,6 +87,16 @@ export function CodeBlock({ variants }: { variants: HighlightedVariant[] }) {
             onClick={() => setActiveFile("css")}
           >
             {active.cssFilename ?? "styles.module.css"}
+          </button>
+          <button
+            role="tab"
+            aria-selected={activeFile === "prompt"}
+            className={
+              activeFile === "prompt" ? styles.fileTabActive : styles.fileTab
+            }
+            onClick={() => setActiveFile("prompt")}
+          >
+            Prompt
           </button>
         </div>
       )}

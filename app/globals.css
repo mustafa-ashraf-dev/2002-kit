@@ -1,32 +1,32 @@
-/* ===== Bastion design tokens — dark, green accent ===== */
+/* ===== Bastion design tokens — light, Apple-clean ===== */
 :root {
-  --bg: #0a0b0a;
-  --bg-2: #091b0d;
-  --surface: #121614;
-  --surface-alt: #171c19;
-  --border: #232a27;
-  --border-strong: #34413b;
+  --bg: #ffffff;
+  --bg-2: #f5f5f7;
+  --surface: #ffffff;
+  --surface-alt: #f5f5f7;
+  --border: #d2d2d7;
+  --border-strong: #86868b;
 
-  --ink: #e4e8e6;
-  --ink-2: #a7b0ac;
-  --ink-3: #7a8583;
+  --ink: #141414;
+  --ink-2: #444447;
+  --ink-3: #86868b;
 
-  --accent: #00e08a;
-  --accent-bright: #33ffb0;
-  --accent-soft: rgba(0, 224, 138, 0.12);
+  --accent: #000a14;
+  --accent-bright: #000a14;
+  --accent-soft: rgba(0, 10, 20, 0.1);
 
-  --danger: #ff5c5c;
-  --danger-soft: rgba(255, 92, 92, 0.12);
-  --warning: #ffb84c;
-  --warning-soft: rgba(255, 184, 76, 0.12);
+  --danger: #d92d20;
+  --danger-soft: rgba(217, 45, 32, 0.08);
+  --warning: #b7791f;
+  --warning-soft: rgba(183, 121, 31, 0.08);
 
-  /* code panel sits slightly lighter than the page so it still reads as
-     an elevated panel even though everything is dark now */
-  --code-bg: #0e1210;
-  --code-ink: #e4e8e6;
+  /* code panel stays dark even on a light page — same "editor floating
+     on paper" idea as developer.apple.com's own doc pages use */
+  --code-bg: #1d1d1f;
+  --code-ink: #f5f5f79a;
 
-  --radius: 6px;
-  --radius-md: 8px;
+  --radius: 8px;
+  --radius-md: 12px;
   --sidebar-width: 260px;
 
   --font-mono: var(--font-plex-mono), "SFMono-Regular", Consolas, monospace;
@@ -49,14 +49,8 @@ body {
   line-height: 1.55;
 }
 
-body {
-  /* subtle scanline texture, kept quiet on purpose */
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.015) 1px,
-    transparent 1px
-  );
-  background-size: 100% 3px;
-}
+/* No scanline texture here on purpose — Apple's own marketing/docs pages
+   never carry a grain or noise layer. Flat, quiet surfaces are the point. */
 
 a {
   color: inherit;
@@ -68,7 +62,6 @@ pre {
   font-family: var(--font-mono);
 }
 
-/* Visible keyboard focus everywhere — accessibility floor, non-negotiable */
 :focus-visible {
   outline: 2px solid var(--accent-bright);
   outline-offset: 2px;
@@ -87,5 +80,10 @@ pre {
 
 ::selection {
   background: var(--accent-soft);
-  color: var(--accent-bright);
+  color: var(--accent);
+}
+.glassEffect {
+  -webkit-backdrop-filter: blur(1px) saturate(1.4);
+  backdrop-filter: url(#glass-distortion) blur(1px) saturate(1.4);
+  border: 2px solid color-mix(in srgb, var(--border-strong) 5%, transparent);
 }
