@@ -1,114 +1,31 @@
-.hero {
-  padding: 48px 0 56px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 40px;
+.page {
+  --background: #fafafa;
+  --foreground: #fff;
+
+  --text-primary: #000;
+  --text-secondary: #666;
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+  --button-secondary-border: #ebebeb;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--accent);
-  margin: 0 0 20px;
-}
-
-.title {
-  font-family: var(--font-mono);
-  margin: 0 0 20px;
-  max-width: 720px;
-  color: var(--ink);
-  font-weight: 900;
-  font-size: clamp(40px, 7vw, 74px);
-  line-height: 0.96;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: var(--ink-2);
-  max-width: 560px;
-  line-height: 1.6;
-}
-
-.sectionTitle {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  margin: 0 0 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-/* Inspector-bracket hover signature, ported from design-reference.html —
-   applies to every card sitewide, not just this one. */
-.card {
-  position: relative;
-  display: block;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  background: var(--surface);
-  transition: border-color 0.15s ease;
-}
-
-.card:hover {
-  border-color: var(--border-strong);
-}
-
-.card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  pointer-events: none;
-}
-
-.card::before {
-  top: 5px;
-  left: 5px;
-  border-top: 1.5px solid var(--accent-bright);
-  border-left: 1.5px solid var(--accent-bright);
-}
-
-.card::after {
-  bottom: 5px;
-  right: 5px;
-  border-bottom: 1.5px solid var(--accent-bright);
-  border-right: 1.5px solid var(--accent-bright);
-}
-
-.card:hover::before,
-.card:hover::after {
-  opacity: 1;
-}
-
-.cardTitle {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  color: var(--ink);
-}
-
-.cardDesc {
-  margin: 0 0 16px;
-  font-size: 0.85rem;
-  color: var(--ink-2);
-  line-height: 1.5;
-}
-
-.cardCount {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent);
+.main {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  max-width: 800px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--foreground);
+  padding: 120px 60px;
 }

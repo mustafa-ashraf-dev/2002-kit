@@ -1,0 +1,125 @@
+/* app/components/[slug]/page.module.css */
+
+.wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px 24px 80px;
+}
+
+.backLink {
+  font-family: var(--font-jetbrains-mono, monospace);
+  font-size: 13px;
+  color: var(--paper-dim);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.backLink:hover {
+  color: var(--paper);
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  color: var(--paper-dim);
+  font-size: 16px;
+  margin-bottom: 20px;
+  max-width: 60ch;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.tagChip {
+  font-family: var(--font-jetbrains-mono, monospace);
+  font-size: 11px;
+  color: var(--paper-dim);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  padding: 4px 11px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* the real fix: a proper, big, backgrounded showcase container */
+.previewFrame {
+  height: 320px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(226, 130, 60, 0.12),
+      transparent 60%
+    ),
+    var(--surface-2);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.sectionLabel {
+  font-family: var(--font-jetbrains-mono, monospace);
+  font-size: 12px;
+  color: var(--paper-dim);
+  margin: 40px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+/* version Block section*/
+.versionBlock {
+  margin-bottom: 36px;
+}
+.versionHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.versionSummary {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.versionExplanation {
+  color: var(--paper);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.versionDivider {
+  border-bottom: 1px solid var(--line);
+  margin-top: 28px;
+}
+.versionDate {
+  color: var(--accent);
+  font-family: var(--font-jetbrains-mono, monospace);
+  font-size: 13px;
+  border-left: 2px solid var(--line);
+  padding-left: 8px;
+}
+.diff {
+  font-family: var(--font-jetbrains-mono, monospace);
+  font-size: 13px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+@media (max-width: 560px) {
+  .title {
+    font-size: 28px;
+  }
+  .previewFrame {
+    height: 240px;
+  }
+}

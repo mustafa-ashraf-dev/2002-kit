@@ -1,0 +1,45 @@
+.conceptCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.15s ease;
+  cursor: pointer;
+}
+
+.conceptKind {
+  flex-shrink: 0;
+  width: 104px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--paper-dim);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 2px;
+}
+.conceptBody {
+  flex: 1;
+}
+.conceptTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  transition: color 0.15s ease;
+}
+.conceptCard:hover {
+  padding-left: 12px;
+  background-color: var(--line-hover);
+}
+
+.conceptCard:hover .conceptTitle {
+  color: var(--accent);
+}
+.conceptDesc {
+  font-size: 14.5px;
+  color: var(--paper-dim);
+}

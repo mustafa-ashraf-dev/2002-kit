@@ -1,0 +1,105 @@
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.articleHead {
+  padding: 52px 0 8px;
+}
+.kindTag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--paper-dim);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+.readMeta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  color: var(--paper-dim);
+  margin-bottom: 44px;
+}
+.content {
+  display: block;
+  unicode-bidi: isolate;
+}
+.content p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--paper);
+  margin: 0 0 22px;
+}
+.pullQuote {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--paper);
+  margin: 44px 0;
+  padding-left: 22px;
+  border-left: 3px solid var(--accent);
+}
+.marginNote {
+  border-left: 2px solid var(--accent);
+  padding: 2px 0 2px 18px;
+  margin: 32px 0;
+}
+.label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+}
+.marginNote p {
+  font-size: 14.5px;
+  color: var(--paper-dim);
+  margin: 0;
+}
+
+/* Next Up Section */
+.nextUp {
+  margin: 64px 0 40px;
+}
+.nextUpLabel {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  color: var(--paper-dim);
+  margin-bottom: 14px;
+}
+.nextCard {
+  display: block;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+.nextCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.nextCardKind {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  color: var(--paper-dim);
+  margin-bottom: 8px;
+}
+.nextCardTitle {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.nextCardArrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 8px;
+  display: block;
+}

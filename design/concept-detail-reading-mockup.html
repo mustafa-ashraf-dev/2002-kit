@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>How 2FA actually works — 2002 devs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas:#121316; --surface-1:#1A1C21; --surface-2:#212429;
+    --paper:#F2F0EB; --paper-dim:#9E9C96; --line:#2A2D33; --accent:#E2823C; --focus:#E2823C;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--paper); font-family:'Space Grotesk',sans-serif; line-height:1.7; font-size:16px; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  a:focus-visible, button:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+  .wrap { max-width:680px; margin:0 auto; padding:0 24px; }
+
+  /* reading progress bar — momentum cue, always visible while scrolling */
+  .progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--accent); z-index:50; width:0%; transition:width 0.1s ease; }
+
+  header.site-header { border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(18,19,22,0.9); backdrop-filter:blur(10px); z-index:20; }
+  .header-inner { max-width:680px; margin:0 auto; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--paper); }
+  .brand-mark { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:14px; background:var(--accent); color:var(--canvas); padding:3px 7px; border-radius:4px; }
+  .back-link { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--paper-dim); text-decoration:none; }
+  .back-link:hover { color:var(--paper); }
+
+  .article-head { padding:52px 0 8px; }
+  .kind-tag { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); border:1px solid var(--line); padding:5px 10px; border-radius:6px; display:inline-block; margin-bottom:18px; }
+  .article-head h1 { font-size:34px; font-weight:600; line-height:1.28; margin:0 0 14px; }
+  .read-meta { font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--paper-dim); margin-bottom:44px; }
+
+  .content p { font-size:17px; line-height:1.75; color:var(--paper); margin:0 0 22px; }
+  .content p mark { background:transparent; color:var(--accent); font-weight:600; }
+
+  /* pull quote — breaks pacing every so often, gives the eye a rest and a highlight */
+  .pull-quote {
+    font-size:24px; font-weight:600; line-height:1.4; color:var(--paper);
+    margin:44px 0; padding-left:22px; border-left:3px solid var(--accent);
+  }
+
+  .margin-note { border-left:2px solid var(--accent); padding:2px 0 2px 18px; margin:32px 0; }
+  .margin-note .label { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); display:block; margin-bottom:6px; }
+  .margin-note p { font-size:14.5px; color:var(--paper-dim); margin:0; }
+
+  /* next-up — keeps the reading chain going instead of ending on a dead page */
+  .next-up { margin:64px 0 40px; }
+  .next-up-label { font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--paper-dim); margin-bottom:14px; }
+  .next-card {
+    display:block; background:var(--surface-1); border:1px solid var(--line); border-radius:14px;
+    padding:22px; text-decoration:none; color:inherit; transition:border-color 0.15s ease, transform 0.15s ease;
+  }
+  .next-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .next-card-kind { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--paper-dim); margin-bottom:8px; }
+  .next-card-title { font-size:19px; font-weight:600; margin-bottom:6px; }
+  .next-card-arrow { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); margin-top:8px; display:block; }
+
+  footer.site-footer { border-top:1px solid var(--line); padding:28px 0 56px; margin-top:20px; }
+  .footer-inner { max-width:680px; margin:0 auto; padding:0 24px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-dim); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#"><span class="brand-mark">02</span></a>
+    <a class="back-link" href="#">← concepts</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="article-head">
+    <span class="kind-tag">process</span>
+    <h1>What's actually inside that 6-digit code?</h1>
+    <div class="read-meta">4 min read · updated Feb 2026</div>
+  </div>
+
+  <div class="content">
+    <p>Not "enter the code you got." What's happening between your phone and their server while you wait for the text to arrive — because the code itself is almost beside the point.</p>
+
+    <p>When you enter your password and it checks out, the server doesn't just trust you. It generates a short-lived code, usually 6 digits, tied to your account and a timestamp. That code gets sent somewhere — SMS, email, an authenticator app — over a channel that has nothing to do with the connection you're currently logged in on.</p>
+
+    <div class="pull-quote">The entire point of the second device isn't the code. It's the second channel.</div>
+
+    <p>If someone steals your password — through phishing, a leaked database, a keylogger — they'd also need access to your phone's texts or your authenticator app to finish logging in. Two separate things have to be compromised at once, not just one. That's the actual security model. The code is just the mechanism.</p>
+
+    <div class="margin-note">
+      <span class="label">why not just a longer password instead?</span>
+      <p>A long password only protects against someone guessing it. It does nothing if the password is stolen outright. 2FA's second channel means a stolen password alone isn't enough.</p>
+    </div>
+
+    <p>This is also why the code expires fast — usually within 30 seconds to 5 minutes. A 6-digit code only has a million possible values, trivially brute-forceable with no time limit. A short expiry window turns <mark>eventually guessable</mark> into <mark>useless after 5 minutes</mark>.</p>
+
+    <p>The real weakness in this system isn't the math — it's SMS itself. A SIM swap lets an attacker receive your texts without touching your phone at all. That's why authenticator apps, which compute the code locally from a shared secret and the current time, are considered stronger: there's no network delivery step to intercept.</p>
+  </div>
+
+  <div class="next-up">
+    <div class="next-up-label">next up</div>
+    <a class="next-card">
+      <div class="next-card-kind">process</div>
+      <div class="next-card-title">Why can a JWT look valid and still be a lie?</div>
+      <span class="next-card-arrow">continue reading →</span>
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">2002 devs — built and broken in public</div>
+</footer>
+
+<script>
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = scrolled + '%';
+  });
+</script>
+</body>
+</html>

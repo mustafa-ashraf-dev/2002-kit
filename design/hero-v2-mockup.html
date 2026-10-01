@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2002 devs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas:#121316; --surface-1:#1A1C21; --surface-2:#212429;
+    --paper:#F2F0EB; --paper-dim:#9E9C96; --line:#2A2D33; --accent:#E2823C; --focus:#E2823C;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--paper); font-family:'Space Grotesk',sans-serif; line-height:1.6; font-size:16px; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  a:focus-visible, button:focus-visible, textarea:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; position:relative; }
+
+  header.site-header { border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(18,19,22,0.9); backdrop-filter:blur(10px); z-index:20; }
+  .header-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 0; }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--paper); }
+  .brand-mark { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:15px; background:var(--accent); color:var(--canvas); padding:3px 8px; border-radius:4px; }
+  .brand-name { font-weight:600; font-size:17px; }
+  nav.main-nav ul { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+  nav.main-nav a { font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--paper-dim); text-decoration:none; }
+  nav.main-nav a:hover { color:var(--paper); }
+
+  /* hero section — full bleed background treatment, not confined to .wrap */
+  .hero-section {
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+    padding-bottom:56px;
+  }
+  /* animated dot grid backdrop */
+  .dot-grid {
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(226,130,60,0.18) 1px, transparent 1px);
+    background-size:28px 28px;
+    mask-image:radial-gradient(ellipse 700px 420px at 70% 10%, black 20%, transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 700px 420px at 70% 10%, black 20%, transparent 75%);
+    animation:drift 18s linear infinite;
+  }
+  @keyframes drift { from { background-position:0 0; } to { background-position:56px 28px; } }
+  @media (prefers-reduced-motion: reduce) { .dot-grid { animation:none; } }
+
+  .glow { position:absolute; top:-140px; left:60%; transform:translateX(-50%); width:800px; height:480px;
+    background:radial-gradient(ellipse at center, rgba(226,130,60,0.16) 0%, transparent 70%); pointer-events:none; }
+
+  .hero { display:grid; grid-template-columns:1.05fr 1fr; gap:44px; padding:84px 0 8px; align-items:center; position:relative; z-index:1; }
+  .hero-eyebrow { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .hero-eyebrow .pulse { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .hero h1 { font-size:42px; font-weight:600; line-height:1.2; margin:0 0 18px; letter-spacing:-0.015em; }
+  .hero h1 .accent-word { color:var(--accent); }
+  .hero p { font-size:16.5px; color:var(--paper-dim); margin:0 0 26px; max-width:46ch; }
+  .hero-actions { display:flex; gap:12px; margin-bottom:36px; }
+  .hero-actions a { font-family:'JetBrains Mono',monospace; font-size:13.5px; text-decoration:none; padding:11px 20px; border-radius:8px; font-weight:500; }
+  .hero-actions a.primary { background:linear-gradient(180deg,#EE9455,var(--accent)); color:#1a0f06; box-shadow:0 4px 24px rgba(226,130,60,0.28); }
+  .hero-actions a.secondary { background:var(--surface-1); color:var(--paper); border:1px solid var(--line); }
+
+  /* live ticking stats, inline under the hero copy */
+  .hero-stats { display:flex; gap:28px; }
+  .hero-stat { }
+  .hero-stat-num { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:600; color:var(--paper); }
+  .hero-stat-label { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); margin-top:2px; }
+
+  /* refined demo widget */
+  .demo-widget { background:var(--surface-1); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.4); }
+  .demo-topbar { display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); background:var(--surface-2); }
+  .demo-dots { display:flex; gap:6px; }
+  .demo-dots span { width:8px; height:8px; border-radius:50%; background:var(--line); }
+  .demo-label { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); }
+  .demo-live { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--accent); display:flex; align-items:center; gap:5px; }
+  .demo-live .pulse { width:5px; height:5px; border-radius:50%; background:var(--accent); animation:pulse 1.8s infinite; }
+
+  .demo-stage { display:flex; align-items:center; justify-content:center; padding:36px; background:
+      radial-gradient(circle at 50% 30%, rgba(226,130,60,0.08), transparent 65%), var(--canvas); }
+  .demo-btn { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:500; background:var(--paper); color:var(--canvas); border:none; padding:10px 22px; cursor:pointer; transition:all 0.15s ease; }
+
+  .demo-code-wrap { position:relative; border-top:1px solid var(--line); }
+  .demo-code { width:100%; min-height:104px; background:transparent; color:var(--paper); font-family:'JetBrains Mono',monospace; font-size:12.5px; line-height:1.7; border:none; padding:14px 16px; resize:none; caret-color:var(--accent); }
+  .demo-hint { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); padding:0 16px 14px; }
+
+  @media (max-width:820px) { .hero { grid-template-columns:1fr; } .hero-stats { flex-wrap:wrap; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#"><span class="brand-mark">02</span><span class="brand-name">2002 devs</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <ul><li><a href="#">components</a></li><li><a href="#">concepts</a></li><li><a href="#">articles</a></li><li><a href="#">about</a></li></ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-section">
+  <div class="dot-grid" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow"><span class="pulse"></span>a working notebook, not a finished product</div>
+        <h1>Understand how it works,<br>not just <span class="accent-word">how to copy it</span>.</h1>
+        <p>Every component here is real, versioned, and editable — like the one on the right. Try changing something.</p>
+        <div class="hero-actions">
+          <a href="#" class="primary">résumé</a>
+          <a href="#" class="secondary">github</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-num" data-target="124">0</div><div class="hero-stat-label">components</div></div>
+          <div class="hero-stat"><div class="hero-stat-num" data-target="87">0</div><div class="hero-stat-label">concepts</div></div>
+          <div class="hero-stat"><div class="hero-stat-num" data-target="31">0</div><div class="hero-stat-label">articles</div></div>
+        </div>
+      </div>
+
+      <div class="demo-widget">
+        <div class="demo-topbar">
+          <div class="demo-dots"><span></span><span></span><span></span></div>
+          <span class="demo-label">Button.css</span>
+          <span class="demo-live"><span class="pulse"></span>live</span>
+        </div>
+        <div class="demo-stage"><button class="demo-btn" id="liveBtn">Try me</button></div>
+        <div class="demo-code-wrap">
+          <textarea class="demo-code" id="cssEditor" spellcheck="false">.btn {
+  background: #F2F0EB;
+  border-radius: 4px;
+  padding: 10px 20px;
+}</textarea>
+          <div class="demo-hint">↑ edit this. every component on the site works like this.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style id="liveStyle"></style>
+<script>
+  const editor = document.getElementById('cssEditor');
+  const liveStyleTag = document.getElementById('liveStyle');
+  function applyLiveCss() {
+    liveStyleTag.textContent = editor.value.replace(/\.btn/g, '#liveBtn');
+  }
+  editor.addEventListener('input', applyLiveCss);
+  applyLiveCss();
+
+  // ticking counters on load
+  document.querySelectorAll('.hero-stat-num').forEach(el => {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+</script>
+</body>
+</html>
