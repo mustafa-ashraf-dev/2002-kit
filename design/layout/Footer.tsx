@@ -48,7 +48,7 @@ export function Footer({
           <p>{tagline}</p>
         </div>
         <div className="footer-col">
-          <h4>explore</h4>
+          <h2>explore</h2>
           {exploreLinks.map((l) => (
             <Link
               key={l.href}
@@ -60,7 +60,7 @@ export function Footer({
           ))}
         </div>
         <div className="footer-col">
-          <h4>connect</h4>
+          <h2>connect</h2>
           {connectLinks.map((l) => (
             <Link
               key={l.href}
