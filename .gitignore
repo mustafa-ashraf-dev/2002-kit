@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # To do list
-TodoList.md
+.TodoList.md
