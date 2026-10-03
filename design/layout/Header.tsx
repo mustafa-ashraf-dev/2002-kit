@@ -62,7 +62,7 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <LanguageSwitcher />
+        {/* <LanguageSwitcher /> */}
       </div>
     </header>
   );
