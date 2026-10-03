@@ -8,10 +8,10 @@ export function Hero() {
           <span className="accent">Improve it in public.</span>
         </h1>
         <p>
-          Built in the age of AI, when the fundamentals matter more, not less.
-          Real components with real trade offs plus what the frontend job
-          actually looks like day to day, the part nobody explained to me when I
-          started.{" "}
+          A real library of UI components, concepts, and patterns — documented
+          the way I wish someone had shown me, with the actual decisions and
+          trade-offs behind each one. Built in the age of AI, when the
+          fundamentals matter more, not less.
         </p>
         <p className="eyebrow">Note: A human idea, written with AI.</p>{" "}
         <div className="actions">
