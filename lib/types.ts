@@ -18,11 +18,14 @@ export interface ComponentVersion {
 export interface ComponentEntry extends BaseEntry {
   type: "component";
   status: "stable" | "draft" | "deprecated";
-  history?: ComponentVersion[] | undefined; // optional array of version history
-  code: string;
-  cssCode: string;
+  history?: ComponentVersion[] | undefined;
+  code: string; // one HTML, used by both card and slug page
+  cssCode: string; // full-size CSS (slug page)
+  cardCssCode?: string; // small CSS (card), falls back to cssCode
   aiGenerated?: boolean;
   aiPrompt?: string;
+  cardPreviewMode: "icon" | "scaled";
+  previewIcon?: string;
 }
 type Block =
   | { type: "paragraph"; text: string }

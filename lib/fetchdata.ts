@@ -1,7 +1,6 @@
 // export async function getComponentBySlug(slug: string) {
 //   return await db.components.findOne({ slug });
 
-import { ArticlesData } from "@/content/articles/data";
 import { ComponentsData } from "@/content/components/data";
 import { ConceptsData } from "@/content/concepts/data";
 import { ComponentEntry } from "./types";
@@ -42,20 +41,21 @@ export function getFilteredComponents({
 
 // Get all articles
 // Explain
-export function getFilteredArticles({
-  query,
-  tag,
-}: {
-  query?: string;
-  tag?: string;
-}) {
-  const q = (query ?? "").toLowerCase();
-  return ArticlesData.filter((a) => {
-    const matchesQuery = !q || a.title.toLowerCase().includes(q);
-    const matchesTag = !tag || tag === "all" || a.tags?.includes(tag);
-    return matchesQuery && matchesTag;
-  });
-}
+// export function getFilteredArticles({
+//   query,
+//   tag,
+// }: {
+//   query?: string;
+//   tag?: string;
+// }) {
+//   const q = (query ?? "").toLowerCase();
+
+//   return ArticlesData.filter((a) => {
+//     const matchesQuery = !q || a.title.toLowerCase().includes(q);
+//     const matchesTag = !tag || tag === "all" || a.tags?.includes(tag);
+//     return matchesQuery && matchesTag;
+//   });
+// }
 
 // Get all patterns
 

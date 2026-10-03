@@ -71,7 +71,11 @@ export default async function ComponentsPage({
             >
               {/* Preview if there is a preview show for the component */}
               {/* Preview CSS need to get fixed */}
-              <LivePreview code={c.code} cssCode={c.cssCode} />
+              <LivePreview
+                variant="card"
+                code={c.code}
+                cssCode={c.cardCssCode ?? c.cssCode}
+              />
 
               <div className={styles.cardBody}>
                 <div className={styles.cardTitle}>{c.title}</div>

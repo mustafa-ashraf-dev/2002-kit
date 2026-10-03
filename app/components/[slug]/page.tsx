@@ -5,7 +5,27 @@ import { CodeTabs } from "@/design/ui/CodeTabs";
 import Link from "next/link";
 import { Badge } from "@/design/ui/Badge";
 import styles from "./page.module.css";
+import { Metadata } from "next";
+import { DiffCode } from "@/design/ui/DiffCode";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const component = getComponentBySlug(slug);
 
+  if (!component) return { title: "Component not found" };
+
+  return {
+    title: component.title,
+    description: component.description,
+    openGraph: {
+      title: component.title,
+      description: component.description,
+    },
+  };
+}
 export function generateStaticParams() {
   return getAllComponentSlugs().map((slug) => ({ slug }));
 }
@@ -40,7 +60,7 @@ export default async function ComponentsPage({
       </div>
 
       <div className={styles.previewFrame}>
-        <LivePreview code={component.code} cssCode={component.cssCode} />
+        <LivePreview code={component.code} cssCode={component.cssCode} />{" "}
       </div>
 
       <div className={styles.sectionLabel}>implementation</div>
@@ -49,7 +69,6 @@ export default async function ComponentsPage({
         cssCode={component.cssCode}
         prompt={component.aiGenerated ? component.aiPrompt : undefined}
       />
-
       {component.history && component.history.length > 0 && (
         <>
           <div className={styles.sectionLabel}>
@@ -64,18 +83,26 @@ export default async function ComponentsPage({
                 <Badge status={v.label} />
               </div>
               <h3 className={styles.versionSummary}>{v.changeSummary}</h3>
+              {/* Code Before and After */}
+
               {(v.codeBefore || v.codeAfter) && (
                 <div className={styles.diff}>
                   {v.codeBefore && (
-                    <div className={styles["diff-line"] + " " + styles.rm}>
-                      {v.codeBefore}
-                    </div>
+                    <DiffCode
+                      code={v.codeBefore}
+                      className={styles["diff-line"] + " " + styles.rm}
+                    />
                   )}
-                  <div className={styles["diff-line"] + " " + styles.add}>
-                    {v.codeAfter}
-                  </div>
+                  {v.codeAfter && (
+                    <DiffCode
+                      code={v.codeAfter}
+                      className={styles["diff-line"] + " " + styles.add}
+                    />
+                  )}
                 </div>
               )}
+
+              {/* Explanation code */}
               <p className={styles.versionExplanation}>{v.explanation}</p>
               {v.whyNot && (
                 <div className={styles.marginNote}>

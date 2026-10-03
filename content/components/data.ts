@@ -1,48 +1,145 @@
 // app/components/[slug]/page.tsx
 import type { ComponentEntry } from "@/lib/types";
 export const ComponentsData: ComponentEntry[] = [
+  // add to content/components/data.ts
   {
     type: "component",
-    slug: "button",
+    slug: "sign-in-form",
     status: "stable",
-    code: `<button class="btn">Save changes</button>`,
-    cssCode: `.btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  background-color: green;
-  padding: 0.5rem 1rem;
+    title: "Sign-in Form",
+    description:
+      "Native form semantics, password managers actually work with it.",
+    tags: ["forms", "accessibility", "auth"],
+    aiGenerated: true,
+    aiPrompt: `Build a sign-in form (login form) with native form semantics: a real <form> containing a labeled email field (<input type="email" autocomplete="username">), a labeled password field (<input type="password" autocomplete="current-password">), and a <button type="submit"> labeled "Sign in" so Enter submits. Add the password visibility toggle as a <button type="button"> with accessible name "Show password"; put the federated sign-in buttons ("Continue with Google" / "Continue with Apple") above a sign-in method divider — the thin rule with "or" in the middle. The autocomplete tokens are load-bearing: they are what makes password managers recognize and fill the fields.`,
+    code: `<form class="signin-card">
+  <button type="button" class="oauth-btn">Continue with Google</button>
+  <div class="divider"><span>or</span></div>
+  <input type="email" placeholder="you@studio.com" autocomplete="off" aria-label="Email">
+  <input type="password" placeholder="Password" autocomplete="off" aria-label="Password">
+  <button type="button" class="submit-btn">Sign in</button>
+</form>`,
+
+    cssCode: `.signin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 280px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #2A2D33;
+  background: #1A1C21;
+  font-family: system-ui, sans-serif;
+}
+.oauth-btn, .submit-btn, input {
+  height: 40px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.oauth-btn {
+  border: 1px solid #2A2D33;
+  background: #121316;
+  color: #F2F0EB;
+  cursor: pointer;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9E9C96;
+  font-size: 12px;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #2A2D33;
+}
+input {
+  padding: 0 12px;
+  border: 1px solid #2A2D33;
+  background: #121316;
+  color: #F2F0EB;
+  outline: none;
+}
+input:focus { border-color: #E2823C; }
+.submit-btn {
+  border: none;
+  background: #E2823C;
+  color: #1a0f06;
+  font-weight: 600;
+  cursor: pointer;
 }`,
-    title: "Button",
-    description: "Focus-visible states, no invisible focus rings.",
-    tags: ["accessibility", "forms"],
+
+    cardCssCode: `.signin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 208px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #2A2D33;
+  background: #1A1C21;
+  font-family: system-ui, sans-serif;
+}
+.oauth-btn, .submit-btn, input {
+  height: 24px;
+  border-radius: 7px;
+  font-size: 10.5px;
+}
+.oauth-btn {
+  border: 1px solid #2A2D33;
+  background: #121316;
+  color: #F2F0EB;
+  cursor: pointer;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9E9C96;
+  font-size: 10px;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #2A2D33;
+}
+input {
+  padding: 0 8px;
+  border: 1px solid #2A2D33;
+  background: #121316;
+  color: #F2F0EB;
+  outline: none;
+}
+input:focus { border-color: #E2823C; }
+.submit-btn {
+  border: none;
+  background: #E2823C;
+  color: #1a0f06;
+  font-weight: 600;
+  cursor: pointer;
+}`,
     history: [
       {
-        version: "2026.02",
+        version: "2026.03",
         label: "current",
         changeSummary:
-          "Added focus-visible instead of removing the outline entirely",
-        codeBefore: `.btn:focus { outline: none; }`,
-        codeAfter: `.btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}`,
+          "Used real autocomplete tokens instead of generic input types",
+        codeAfter: `<input type="email" autocomplete="username">\n<input type="password" autocomplete="current-password">`,
         explanation:
-          "The first version deleted the focus outline because it clashed with the design. It worked fine using a mouse — it did not work for anyone navigating by keyboard, since the button became invisible the moment it was focused.",
+          "The autocomplete tokens aren't decoration — they're what actually makes password managers (1Password, Chrome's built-in one) recognize these specific fields and offer to fill them. Skip these and autofill either doesn't work or fills the wrong field.",
         whyNot: {
-          question: "why not just style :focus?",
+          question:
+            'why not just autocomplete="email" and autocomplete="password"?',
           answer:
-            ':focus fires on every interaction, including mouse clicks — exactly the "ugly ring on click" issue the outline was originally removed to avoid.',
+            'Those aren\'t real values the spec defines for this purpose. "username" and "current-password" are the actual tokens browsers and password managers look for — using the wrong string silently breaks autofill with no error anywhere.',
         },
       },
-      {
-        version: "2024.06",
-        label: "deprecated",
-        changeSummary: "First version — outline removed for visual polish",
-        codeAfter: `.btn:focus { outline: none; }`,
-        explanation:
-          "First pass. Removed the default focus outline because it looked inconsistent across browsers. Didn't test with a keyboard — didn't know to.",
-      },
     ],
+    cardPreviewMode: "icon",
+    previewIcon: "⚿",
   },
 ];
 // 1 Core Foundation Components

@@ -22,7 +22,7 @@ export default function HomePage() {
         {/* Component Section */}
         <section>
           <div className="section-head">
-            <span className="section-title">components</span>
+            <span className="section-title">Components</span>
             <Link className="view-all" href="/components">
               view all →
             </Link>
@@ -39,8 +39,11 @@ export default function HomePage() {
                 >
                   {/* Preview if there is a preview show for the component */}
                   {/* Preview CSS need to get fixed */}
-                  <LivePreview code={c.code} cssCode={c.cssCode} />
-
+                  <LivePreview
+                    variant="card"
+                    code={c.code}
+                    cssCode={c.cardCssCode ?? c.cssCode}
+                  />
                   <div className={styles.cardBody}>
                     <div className={styles.cardTitle}>{c.title}</div>
                     <div className={styles.cardDesc}>{c.description}</div>
@@ -64,7 +67,7 @@ export default function HomePage() {
         {/* Concepts Section */}
         <section>
           <div className="section-head">
-            <span className="section-title">concepts</span>
+            <span className="section-title">Concepts</span>
             <Link className="view-all" href="/concepts">
               view all →
             </Link>
@@ -86,7 +89,7 @@ export default function HomePage() {
         {/*  articles Section Coming soon*/}
         <section>
           <ComingSoon
-            title="articles"
+            title="Articles"
             items={["How ai works?", "Juniors Positions in era of ai"]}
           />
           {/* <div className="section-head"> */}
@@ -115,7 +118,7 @@ export default function HomePage() {
         {/* Patterns Section Coming soon */}
         <section>
           <ComingSoon
-            title="patterns"
+            title="Patterns"
             items={[
               "debounce vs throttle",
               "optimistic UI updates",

@@ -8,7 +8,7 @@ export interface ComponentCardProps {
   description: string;
   tag?: string;
   status: BadgeStatus;
-  preview: ReactNode; // rendered by the caller — from the previews registry, or a fallback icon
+  preview: ReactNode; // caller decides: icon, or a LivePreviewThumbnail
 }
 
 export function ComponentCard({

@@ -1,12 +1,18 @@
-// design/ui/LivePreview.tsx
 "use client";
 
 export interface LivePreviewProps {
   code: string;
   cssCode?: string;
+  variant?: "full" | "card";
 }
 
-export function LivePreview({ code, cssCode }: LivePreviewProps) {
+export function LivePreview({
+  code,
+  cssCode,
+  variant = "full",
+}: LivePreviewProps) {
+  const isCard = variant === "card";
+
   const doc = `
     <!DOCTYPE html>
     <html>
@@ -19,7 +25,8 @@ export function LivePreview({ code, cssCode }: LivePreviewProps) {
             justify-content: center;
             min-height: 100vh;
             font-family: system-ui, sans-serif;
-            background: transparent;
+            /* transparent in the card so the dot grid shows through */
+            background: ${isCard ? "#2a2d33" : "#2a2d33"};
             color: #F2F0EB;
           }
           ${cssCode ?? ""}
@@ -29,16 +36,25 @@ export function LivePreview({ code, cssCode }: LivePreviewProps) {
     </html>
   `;
 
+  if (isCard) {
+    return (
+      <div className="card-preview-box">
+        <iframe
+          className="card-preview-frame"
+          srcDoc={doc}
+          title="Component card preview"
+          sandbox="allow-same-origin"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
   return (
     <iframe
+      className="mini-live-preview"
       srcDoc={doc}
       title="Live component preview"
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none",
-        background: "transparent",
-      }}
       sandbox="allow-same-origin"
     />
   );

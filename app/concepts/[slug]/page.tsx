@@ -2,6 +2,26 @@ import { getConceptBySlug, getRandomConcept } from "@/lib/fetchdata";
 import styles from "./page.module.css";
 import Link from "next/link";
 import ScrollProgressBar from "@/design/ui/ScrollProgressBar";
+import { Metadata } from "next";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const concept = getConceptBySlug(slug);
+
+  if (!concept) return { title: "Concept not found" };
+
+  return {
+    title: concept.title,
+    description: concept.description,
+    openGraph: {
+      title: concept.title,
+      description: concept.description,
+    },
+  };
+}
 const ConceptsSlugPage = async ({
   params,
 }: {
@@ -92,9 +112,4 @@ const ConceptsSlugPage = async ({
 };
 
 export default ConceptsSlugPage;
-// body = [
-// {
-// bodyDesc:s
-//
-// }
-// ]
+

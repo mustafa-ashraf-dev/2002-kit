@@ -42,8 +42,7 @@ export function Header() {
             className={`menu-icon ${open ? "open" : ""}`}
             aria-hidden="true"
           >
-            <span />
-            <span />
+       
             <span />
           </span>
         </button>
